@@ -1,0 +1,30 @@
+# Node dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build files
+client/build/
+server/dist/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# IDE config
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# MongoDB dumps
+dump/
