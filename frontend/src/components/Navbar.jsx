@@ -7,10 +7,10 @@ function Navbar() {
             <div className='logo-navbar'><h3>Node</h3>Mart</div>
         </div>
         <div className='inner-navbar-container'>
-            <div>Home</div>
+            <Link to="/"><div>Home</div></Link>
             <div>About Us</div>
             <div>Contact</div>
-            <div>Add Product</div>
+            <Link to="/AddProduct"><div>Add Product</div></Link>
         </div>
         <div className='inner-navbar-container'>
             <div className='end-navbar'>Account</div>

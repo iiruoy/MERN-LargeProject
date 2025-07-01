@@ -18,7 +18,7 @@ function HomePageSlider() {
             setIndex(function(curr) { 
                 return (curr + 1) % wordContainer.length;
             })
-        }, 5000);
+        }, 3000);
     }, []);
 
     
