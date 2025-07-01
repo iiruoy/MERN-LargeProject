@@ -1,4 +1,5 @@
 const Item = require('../models/item'); 
+const cloudinary = require('../utils/cloudinary')
 
 // get all items 
 const index = async (req, res) => { 
@@ -13,13 +14,38 @@ const index = async (req, res) => {
 
 // create ne workout 
 const create = async (req, res) => { 
-    const {name, price, descreption, images, category} = req.body
-    console.log(req.body)
-    try { 
-        const item = await Item.create({name, price, descreption, images, category})
-        res.status(200).json(item)
-    } catch(error){ 
-        res.status(400).json({error: error.message})
+    const { name, price, description, category } = req.body;
+
+    try {
+        const imageUrls = [];
+
+        for (const file of req.files) {
+            const uploadResult = await new Promise((resolve, reject) => {
+                const stream = cloudinary.uploader.upload_stream(
+                    { folder: 'products' },
+                    (error, result) => {
+                        if (error) return reject(error);
+                        resolve(result);
+                    }
+                );
+                stream.end(file.buffer); // send in-memory buffer
+            });
+
+            imageUrls.push(uploadResult.secure_url);
+        }
+
+        const item = await Item.create({
+            name,
+            price,
+            description,
+            category,
+            images: imageUrls
+        });
+
+        res.status(200).json(item);
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
     }
 }
 
