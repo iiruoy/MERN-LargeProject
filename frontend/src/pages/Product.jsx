@@ -13,7 +13,8 @@ function Product() {
 
     function handleFileCHange(e) { 
         const files = Array.from(e.target.files); 
-        setImageUrl(files); 
+        setImageUrl(prevFiles => [...prevFiles, ...files]); 
+        console.log(image);
     }
 
     function handleChange(e) {
