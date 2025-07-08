@@ -49,7 +49,18 @@ const create = async (req, res) => {
     }
 }
 
+const showID = async (req, res) => { 
+    console.log(req.params.id, 'this is for the id');
+    try {
+        const item = await Item.findById(req.params.id); 
+        res.status(200).json(item);
+    } catch(error) { 
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+}
 module.exports = { 
     create, 
-    index
+    index, 
+    showID
 }
