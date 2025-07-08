@@ -11,9 +11,7 @@ const router = express.Router();
 router.get('/', itemCtrl.index);
 
 
-router.get('/:id', (req, res) => { 
-    res.json({mssg: 'Get a single items and its id'})
-})
+router.get('/:id', itemCtrl.showID);
 
 router.post('/', upload.array('images'), itemCtrl.create);
 

@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require('cors');
 require("dotenv").config();
 const itemsRoutes = require("./routes/items");
+const cartRoutes = require("./routes/carts");
 require('./config/databse'); 
 
 
@@ -19,6 +20,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/items', itemsRoutes);
+app.use('/api/cart', cartRoutes);
 
 
 // listen for request
