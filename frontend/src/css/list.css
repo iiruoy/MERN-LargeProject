@@ -1,0 +1,78 @@
+.table { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 61px;
+}
+
+.card-container-box-product-home-page { 
+  width: 85%;
+  margin-left: 105px;
+}
+
+.image-container-index { 
+  width: fit-content;
+  height: 160px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px;
+  
+}
+
+.image-container-index > img { 
+  width: 150px;
+  height: 190px;
+  
+}
+
+.outer-div-for-index-product-container { 
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  max-width: 175px;
+}
+
+.image-container-index { 
+  width: 170px;
+  height: 180px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px 10px 10px 10px;
+}
+
+.title-product-home-page { 
+  margin-top: 50px;
+  font-size: 21px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 450;
+  margin-bottom: 20px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.star {
+  color: #f0c0c0; /* light pinkish for empty */
+  font-size: 18px;
+}
+
+.star.filled {
+  color: #ff4500; /* orange-red for filled stars */
+}
+
+.price-container-button { 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.description-product-list{ 
+  font-size: 13px;
+  color: rgb(132, 131, 131);
+  font-family: 'Inter', sans-serif;
+}
