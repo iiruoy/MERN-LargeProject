@@ -39,7 +39,7 @@ function Product() {
             data.append("images", file);
         });
     
-        fetch("http://localhost:3001/api/items/", {
+        fetch("http://localhost:5000/api/items/", {
             method: "POST",
             body: data,
         })
