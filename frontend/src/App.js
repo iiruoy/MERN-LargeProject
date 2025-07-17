@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Product from './pages/Product';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart'
+import Succses from './components/Succses'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path='/AddProduct' element={<Product />} />
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/success" element={<Succses />} />
           </Routes>
         </div>
       </BrowserRouter>

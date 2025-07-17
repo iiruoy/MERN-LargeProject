@@ -33,7 +33,7 @@ function ListProducts() {
                 <div key={item._id} className='outer-div-for-index-product-container'>
                     {item.images && item.images.length > 0 && (
                     <Link to={`/product/${item._id}`} className="product-link">
-                        <div>
+                        <div className='container-index-box-container-image'>
                         <img src={item.images[0]} alt="" className="image-container-index" />
                         </div>
                     </Link>

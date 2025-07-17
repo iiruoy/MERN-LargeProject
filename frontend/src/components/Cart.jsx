@@ -19,6 +19,26 @@ function Cart() {
     fetchCart();
   }, []);
 
+  const handleCheckout = async () => {
+  try {
+    const res = await fetch('http://localhost:3001/api/cart'); // or pass userId here
+    const cart = await res.json();
+    const guestCart = cart.find(c => c.userId === 'guest123');
+
+    const checkoutRes = await fetch('http://localhost:3001/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: guestCart.items })
+    });
+
+    const data = await checkoutRes.json();
+    window.location.href = data.url; // redirect to Stripe Checkout
+  } catch (err) {
+    console.error('Checkout failed:', err);
+  }
+};
+
+
   if (!cart) return <div>Loading cart...</div>;
 
   return (
@@ -36,6 +56,7 @@ function Cart() {
           </div>
         ))
       )}
+      <div><button onClick={handleCheckout}>Check out</button></div>
     </div>
   );
 }
