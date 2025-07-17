@@ -4,6 +4,7 @@ require("dotenv").config();
 const itemsRoutes = require("./routes/items");
 const cartRoutes = require("./routes/carts");
 require('./config/databse'); 
+const checkoutRoutes = require('./routes/checkout');
 
 
 // express app
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/items', itemsRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api', checkoutRoutes);
 
 
 // listen for request
