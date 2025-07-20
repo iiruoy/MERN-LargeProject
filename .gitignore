@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
@@ -35,3 +36,35 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+=======
+# Node dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Build files
+client/build/
+server/dist/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# IDE config
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+
+# MongoDB dumps
+dump/
+>>>>>>> b25452b7d10c654597598d1391b61ef1c54ecb93
