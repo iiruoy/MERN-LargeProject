@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
-import '../css/Login.css'; 
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { useNavigate }         from 'react-router-dom';
+import '../css/Login.css';
 
-function Login({setUser}) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+import { AuthContext } from '../context/AuthContext';
+
+function Login() {
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  const handleSubmit = async (e) => {
+  
+  async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const r = await fetch('http://localhost:5000/api/users/login', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(formData)
       });
+      const data = await r.json();
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setUser(data.user);
-        alert('Login successful!');
-        navigate('/'); //redirect to home
+      if (r.ok) {
+        login(data.user, data.token);     //stores token & user
+        navigate('/');
       } else {
         alert(data.message || 'Login failed');
       }
@@ -32,26 +31,29 @@ function Login({setUser}) {
       console.error(err);
       alert('Server error');
     }
-  };
+  }
 
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
+
         <input
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formData.email}
+          onChange={e => setFormData({ ...formData, email: e.target.value })}
           required
         />
+
         <input
           type="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formData.password}
+          onChange={e => setFormData({ ...formData, password: e.target.value })}
           required
         />
+
         <button type="submit">Login</button>
       </form>
     </div>
@@ -59,3 +61,4 @@ function Login({setUser}) {
 }
 
 export default Login;
+

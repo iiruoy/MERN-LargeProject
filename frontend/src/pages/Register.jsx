@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/Register.jsx
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Register.css';
+import { AuthContext } from '../context/AuthContext';
 
 function Register() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
+  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-  /* Google button: initialise & render once */
+  //Google button – render once
   useEffect(() => {
     /* global google */
     if (window.google) {
       google.accounts.id.initialize({
         client_id: '296701968453-40tdsvnu24j0n90qdlohgvk298pkj6nh.apps.googleusercontent.com',
-        callback: (resp) => {
-          console.log('Google JWT:', resp.credential);
-          // TODO: send resp.credential to backend
-          navigate('/');       // temporary success action
-        }
+        callback : handleGoogleResponse
       });
 
       google.accounts.id.renderButton(
@@ -30,29 +25,50 @@ function Register() {
     }
   }, []);
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  /* called by Google */
+  async function handleGoogleResponse(resp) {
     try {
-      const res = await fetch('http://localhost:5000/api/users/register', {
-        method: 'POST',
+      const r = await fetch('http://localhost:5000/api/users/google', {
+        method : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body   : JSON.stringify({ idToken: resp.credential })
       });
-      const data = await res.json();
-      if (res.ok) {
-        alert('Registration successful!');
+      const data = await r.json();
+
+      if (data.token) {
+        login(data.user, data.token);
         navigate('/');
       } else {
-        alert(data.message || 'Registration failed.');
+        alert(data.message || 'Google login failed');
       }
     } catch (err) {
       console.error(err);
       alert('Server error');
     }
-  };
+  }
+
+  /* traditional register */
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const r = await fetch('http://localhost:5000/api/users/register', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body   : JSON.stringify(formData)
+      });
+      const data = await r.json();
+
+      if (r.ok) {
+        alert('Registration successful!');
+        navigate('/login');
+      } else {
+        alert(data.message || 'Registration failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Server error');
+    }
+  }
 
   return (
     <div className="register-container">
@@ -64,7 +80,7 @@ function Register() {
           name="username"
           placeholder="Username"
           value={formData.username}
-          onChange={handleChange}
+          onChange={e => setFormData({ ...formData, username: e.target.value })}
           required
         />
         <input
@@ -72,7 +88,7 @@ function Register() {
           name="email"
           placeholder="Email"
           value={formData.email}
-          onChange={handleChange}
+          onChange={e => setFormData({ ...formData, email: e.target.value })}
           required
         />
         <input
@@ -80,15 +96,13 @@ function Register() {
           name="password"
           placeholder="Password"
           value={formData.password}
-          onChange={handleChange}
+          onChange={e => setFormData({ ...formData, password: e.target.value })}
           required
         />
         <button type="submit">Register</button>
       </form>
 
       <div style={{ margin: '1rem 0', fontWeight: 600 }}>or</div>
-
-      {/* Google button mounts here */}
       <div id="google-btn"></div>
     </div>
   );
