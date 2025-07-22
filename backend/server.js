@@ -1,11 +1,11 @@
 const express = require("express"); 
-const mongoose = require('mongoose');
 const cors = require('cors');
 require("dotenv").config();
 const itemsRoutes = require("./routes/items");
 const cartRoutes = require("./routes/carts");
 const userRoutes = require('./routes/user');
 require('./config/databse'); 
+const checkoutRoutes = require('./routes/checkout');
 
 
 // express app
@@ -23,10 +23,15 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/items', itemsRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api', checkoutRoutes);
 app.use('/api/users', userRoutes);
 
 // listen for request
-app.listen(process.env.PORT, () => { 
-    console.log("listeing port ", process.env.PORT)
-})
+if (require.main === module) {
+  app.listen(process.env.PORT, () => {
+    console.log("listening on port", process.env.PORT);
+  });
+}
 
+
+module.exports = app;
