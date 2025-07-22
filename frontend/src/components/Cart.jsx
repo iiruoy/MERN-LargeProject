@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../css/cart.css'
 
 function Cart() {
   const [cart, setCart] = useState(null);
@@ -42,21 +43,23 @@ function Cart() {
   if (!cart) return <div>Loading cart...</div>;
 
   return (
-    <div>
-      <h2>Your Cart</h2>
+    <div className="cart-container">
+      <h2 className="cart-title">Your Cart</h2>
       {cart.items.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p className="cart-empty">Your cart is empty.</p>
       ) : (
         cart.items.map((item, index) => (
-          <div key={index} style={{ marginBottom: '20px' }}>
-            <img src={item.product.images[0]} alt="" width="100" />
-            <div><strong>{item.product.name}</strong></div>
-            <div>Quantity: {item.quantity}</div>
-            <div>Price: ${item.product.price}</div>
+          <div key={index} className="cart-item">
+            <img src={item.product.images[0]} alt="" className="cart-item-image" />
+            <div className="cart-item-details">
+              <div className="cart-item-name">{item.product.name}</div>
+              <div className="cart-item-quantity">Quantity: {item.quantity}</div>
+              <div className="cart-item-price">Price: ${item.product.price}</div>
+            </div>
           </div>
         ))
       )}
-      <div><button onClick={handleCheckout}>Check out</button></div>
+      <button className="cart-checkout-btn" onClick={handleCheckout}>Check out</button>
     </div>
   );
 }

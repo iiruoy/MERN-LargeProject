@@ -85,3 +85,37 @@
   border-radius: 10px 10px 10px 10px;
 
 }
+
+.price-container-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+
+}
+
+.price-container-button > div:first-child {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.5px;
+}
+
+.price-container-button button {
+  padding: 8px 22px;
+  background: linear-gradient(90deg, #ff7300 60%, #ff9a3c 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.12s;
+  box-shadow: 0 2px 8px rgba(255,115,0,0.08);
+  letter-spacing: 0.5px;
+}
+
+.price-container-button button:hover {
+  background: linear-gradient(90deg, #ff9a3c 60%, #ff7300 100%);
+  transform: translateY(-2px) scale(1.04);
+}
