@@ -16,7 +16,6 @@
     "@react-navigation/native-stack": "^7.3.21",
     "expo": "~53.0.17",
     "expo-app-loading": "^1.0.3",
-    "expo-auth-session": "~6.2.1",
     "expo-constants": "~17.1.7",
     "expo-font": "~13.3.2",
     "expo-image-picker": "~16.1.4",
@@ -28,8 +27,7 @@
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
-    "expo-web-browser": "~14.2.0",
-    "expo-random": "undefined"
+    "expo-web-browser": "~14.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
