@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import '../css/addProduct.css'
 
 function Product() {
 
@@ -52,14 +52,35 @@ function Product() {
 
 
   return (
-    <form onSubmit={handleSubmit}>
-        <div>Name<input type="text" name="name" onChange={handleChange} value={formData.name}/></div>
-        <div>imges<input type="file" multiple onChange={handleFileCHange} /></div>
-        <div>price<input type="text" name="price" onChange={handleChange} value={formData.price}/></div>
-        <div>description<input type="text" name="description" onChange={handleChange} value={formData.description}/></div>
-        <div>catogoray<input type="text" name="category" onChange={handleChange} value={formData.category}/></div>
-        <button type="submit">Submit</button>
+    <form onSubmit={handleSubmit} className="product-form">
+    <div className="form-group">
+        <label htmlFor="name">Name</label>
+        <input type="text" name="name" id="name" onChange={handleChange} value={formData.name} />
+    </div>
+
+    <div className="form-group">
+        <label htmlFor="images">Images</label>
+        <input type="file" id="images" multiple onChange={handleFileCHange} />
+    </div>
+
+    <div className="form-group">
+        <label htmlFor="price">Price</label>
+        <input type="text" name="price" id="price" onChange={handleChange} value={formData.price} />
+    </div>
+
+    <div className="form-group">
+        <label htmlFor="description">Description</label>
+        <input type="text" name="description" id="description" onChange={handleChange} value={formData.description} />
+    </div>
+
+    <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <input type="text" name="category" id="category" onChange={handleChange} value={formData.category} />
+    </div>
+
+    <button type="submit" className="submit-btn">Submit</button>
     </form>
+
   )
 }
 
