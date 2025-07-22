@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image, ScrollView, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import ProductDetail from '../components/ProductDetail';
 
 const ProductScreen = () => {
   const [images, setImages] = useState<ImagePicker.ImagePickerAsset[]>([]);
@@ -76,6 +77,7 @@ const ProductScreen = () => {
       <TextInput style={styles.input} value={formData.category} onChangeText={text => handleChange('category', text)} />
 
       <Button title="Pick Images" onPress={pickImages} />
+      
       <View style={styles.imagePreviewContainer}>
         {images.map((img, idx) => (
           <Image key={idx} source={{ uri: img.uri }} style={styles.imagePreview} />

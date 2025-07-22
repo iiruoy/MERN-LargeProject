@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    "expo-web-browser"
+  ],
+  "extra": {
+    "eas": {
+      "projectId": "41651f20-7d24-4f66-8b76-287d28a34db7"
+    }
+  },
+  "expo": {
+    "android": {
+      "package": "com.se398316.mernmobileapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "41651f20-7d24-4f66-8b76-287d28a34db7"
+      }
+    }
+  }
+}

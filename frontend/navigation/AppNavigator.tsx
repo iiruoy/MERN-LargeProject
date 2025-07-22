@@ -8,29 +8,33 @@ import ProductScreen from '../pages/ProductScreen';
 import ProductDetail from '../components/ProductDetail';
 import Cart from '../components/Cart';
 import Success from '../components/Success';
+import Register from '../pages/Register';
 
 const Drawer = createDrawerNavigator();
 
 const Stack = createNativeStackNavigator();
 
-function MainStack() {
-  return (
-    <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Product" component={ProductScreen} />
-      <Stack.Screen name="ProductDetail" component={ProductDetail} />
-      <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen name="Success" component={Success} />
-    </Stack.Navigator>
-  );
-}
-
+// added register/log in
 export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Main">
-        <Drawer.Screen name="Main" component={MainStack} options={{ title: 'Home'}} />
+        <Drawer.Screen name="Main" component={MainStack} />
+        <Drawer.Screen name="Products" component={ProductScreen} />
+        <Drawer.Screen name="Cart" component={Cart} />
+        <Drawer.Screen name="Register/Log in" component={Register} />
       </Drawer.Navigator>
     </NavigationContainer>
-  );
+  )
+}
+
+function MainStack() {
+  return(
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Product" component={ProductScreen} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
+      <Stack.Screen name="Success" component={Success} />
+    </Stack.Navigator>
+  )
 }

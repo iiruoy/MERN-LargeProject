@@ -70,15 +70,12 @@ export default function ListProducts() {
     </TouchableOpacity>
   );
 
+  // key message here? 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Top Picks</Text>
       <FlatList
-        data={items}
-        
-        // test line
-        // keyExtractor = {(item) => item._id.toString()}
-        
+        data={items}        
         keyExtractor={item => item._id}
         renderItem={renderItem}
         contentContainerStyle={{ paddingBottom: 20 }}

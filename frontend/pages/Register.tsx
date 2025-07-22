@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+import Constants from 'expo-constants';
+
+WebBrowser.maybeCompleteAuthSession();
 
 type RootStackParamList = {
   Home: undefined;
@@ -27,6 +33,18 @@ export default function Register() {
     email: '',
     password: '',
   });
+
+  // need web client ID from Google cloud console
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { authentication } = response;
+      handleGoogleResponse(authentication?.accessToken);
+    }
+  }, [response]);
 
   const handleChange = (key: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [key]: value }));
@@ -55,9 +73,34 @@ export default function Register() {
   };
 
   const handleGoogleSignIn = () => {
-    // TODO: Implement Google Sign-In with Expo or react-native-google-signin
-    Alert.alert('Google Sign-In pressed', 'Implement Google Sign-In flow here');
+    promptAsync();
   };
+
+  const handleGoogleResponse = async (token: string | undefined) => {
+  if (!token) return;
+
+  try {
+    const res = await fetch('http://localhost:5000/api/users/google', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idToken: token }),
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      Alert.alert('Login Success', 'Google account authenticated');
+      navigation.navigate('Home');
+    } 
+    else {
+      Alert.alert('Login Failed', data.message || 'Try again');
+    }
+  } 
+  catch (err) {
+    console.error(err);
+    Alert.alert('Server Error');
+  }
+};
+
 
   return (
     <View style={styles.container}>
