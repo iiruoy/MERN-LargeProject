@@ -15,7 +15,7 @@ function ListProducts() {
                 const res = await fetch('http://localhost:3001/api/items');
                 const data = await res.json()
                 console.log(data); 
-                setItems(data);
+                setItems(data.slice(2)); 
             } catch (err){ 
                 console.log("Error")
             }
