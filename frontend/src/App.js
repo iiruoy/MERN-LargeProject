@@ -7,6 +7,10 @@ import Product from './pages/Product';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart'
 import Succses from './components/Succses'
+import AboutUs from './components/AboutUs';
+import ContactUs from './components/ContactUs';
+import ListProducts from './components/ListProducts';
+import AllProductsPage from './components/AllProductsPage';
 
 
 function App() {
@@ -17,6 +21,9 @@ function App() {
         <div className='pages'>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/about' element={<AboutUs />} />
+            <Route path='/contact' element={<ContactUs />} />
+            <Route path='/ListProduct' element={<AllProductsPage />} />
             <Route path='/AddProduct' element={<Product />} />
             <Route path='/product/:id' element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />

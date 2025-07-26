@@ -9,9 +9,10 @@ function Navbar() {
         </div>
         <div className='inner-navbar-container'>
             <Link to="/"><div>Home</div></Link>
-            <div>About Us</div>
-            <div>Contact</div>
+            <Link to="/about"><div>About Us</div></Link>
+            <Link to="/Contact"><div>Contact Us</div></Link>
             <Link to="/AddProduct"><div>Add Product</div></Link>
+            <Link to="/ListProduct"><div>List Prodcut</div></Link>
         </div>
         <div className='inner-navbar-container'>
             <div className='end-navbar'>Account</div>
