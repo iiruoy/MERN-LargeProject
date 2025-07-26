@@ -39,6 +39,13 @@ function Cart() {
   }
 };
 
+const handleDelete = (productId) => {
+    fetch(`http://localhost:3001/api/cart/${productId}`, {
+        method: 'DELETE',
+    }).then(() => window.location.reload());
+
+};
+
 
   if (!cart) return <div>Loading cart...</div>;
 
@@ -56,6 +63,7 @@ function Cart() {
               <div className="cart-item-quantity">Quantity: {item.quantity}</div>
               <div className="cart-item-price">Price: ${item.product.price}</div>
             </div>
+            <div><button className="delete-button"onClick={() => handleDelete(item.product._id)}>Delete</button></div>
           </div>
         ))
       )}
