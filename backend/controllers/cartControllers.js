@@ -1,4 +1,5 @@
 const Cart = require('../models/cart');
+const { deleteOne, findOne } = require('../models/item');
 const cloudinary = require('../utils/cloudinary');
 
 const indexCart = async (req, res) => { 
@@ -42,9 +43,16 @@ const createCart = async (req, res) => {
     }
 }
 
+const deleteItem = async (req, res) => {
+    const id = req.params.id; 
+    const cart = await Cart.findOne({ userId: 'guest123' });
+    cart.items = cart.items.filter(item => item.product.toString() !== id);
+    await cart.save();
+    res.json({ message: 'Item deleted from cart' });
+};
 
 module.exports = { 
     createCart, 
     indexCart, 
-    
+    deleteItem
 }

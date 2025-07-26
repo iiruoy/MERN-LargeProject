@@ -8,5 +8,7 @@ router.post('/', cartCtrl.createCart);
 // View all carts (for testing/admin)
 router.get('/', cartCtrl.indexCart);
 
+router.delete('/:id', cartCtrl.deleteItem)
+
 module.exports = router;
 
