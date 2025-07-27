@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>React App</title>
+
+    <!-- Google Identity Services loader -->
+    <script
+      src="https://accounts.google.com/gsi/client"
+      async
+      defer
+      data-auto_prompt="false"></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- React mounts here -->
+    <div id="root"></div>
+
+    <!-- Initialises GIS (NO button attributes here) -->
+    <div
+      id="g_id_onload"
+      data-client_id="296701968453-40tdsvnu24j0n90qdlohgvk298pkj6nh.apps.googleusercontent.com"
+      data-callback="handleGoogleResponse">
+    </div>
+
+    <script>
+      /* called automatically after user picks a Google account */
+      function handleGoogleResponse (res) {
+        console.log('Google ID token:', res.credential);
+        /* TODO: POST res.credential to /api/users/google-login */
+      }
+    </script>
+
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
