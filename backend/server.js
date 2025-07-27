@@ -3,16 +3,14 @@ const cors = require('cors');
 require("dotenv").config();
 const itemsRoutes = require("./routes/items");
 const cartRoutes = require("./routes/carts");
-require('./config/databse'); 
 const checkoutRoutes = require('./routes/checkout');
-
+const userRoutes = require('./routes/user'); 
+require('./config/databse'); 
 
 // express app
 const app = express(); 
 app.use(cors());
-// app.options('/*', cors());
-
-app.use(express.json()); //without this req.body will be undefiend
+app.use(express.json()); 
 
 app.use((req, res, next) => { 
     console.log(req.path, req.method); 
@@ -23,10 +21,9 @@ app.use((req, res, next) => {
 app.use('/api/items', itemsRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api', checkoutRoutes);
-
+app.use('/api/users', userRoutes); 
 
 // listen for request
 app.listen(process.env.PORT, () => { 
-    console.log("listeing port ", process.env.PORT)
-})
-
+    console.log("listening on port", process.env.PORT);
+});
