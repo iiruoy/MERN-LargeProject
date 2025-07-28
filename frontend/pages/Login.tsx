@@ -39,7 +39,7 @@ export default function Login({ setUser }: LoginProps) {
     // local and straight to database
     
     try {
-      const res = await fetch('http://192.168.68.65:3000/api/users/login', {
+      const res = await fetch('http://localhost:3000/api/users/login', {
       // const res = await fetch('http://COP4331Group7.xyz/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

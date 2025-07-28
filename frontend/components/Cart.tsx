@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { useCart } from '../components/CartContext';
 
 interface Product {
   images: string[];
   name: string;
   price: number;
+
 }
 
 interface CartItem {
   product: Product;
   quantity: number;
+  addToCart: (item: Item) => void;
 }
 
 interface CartData {
@@ -18,13 +21,15 @@ interface CartData {
 }
 
 export default function Cart() {
+  const { cart, loading } = useCart();
+  /*
   const [cart, setCart] = useState<CartData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        // const res = await fetch('http://192.168.68.65:3001/api/cart');
+        // const res = await fetch('http://192.168.68.66:3001/api/cart');
         const res = await fetch('http://COP4331Group7.xyz/api/cart');
         const data: CartData[] = await res.json();
         const guestCart = data.find(c => c.userId === 'guest123');
@@ -38,6 +43,8 @@ export default function Cart() {
 
     fetchCart();
   }, []);
+*/
+
 
   if (loading) {
     return (

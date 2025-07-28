@@ -27,8 +27,8 @@ export default function ListProducts() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        // const res = await fetch('http://192.168.68.65:3001/api/items');
-        const res = await fetch('http://COP4331Group7.xyz/api/items');
+        const res = await fetch('http://192.168.68.66:3001/api/items');
+        // const res = await fetch('http://COP4331Group7.xyz/api/items');
         const data: Item[] = await res.json();
         setItems(data);
       } 

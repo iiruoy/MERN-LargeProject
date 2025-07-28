@@ -41,7 +41,7 @@ export default function Register() {
       return;
     }
 
-    /*
+    
     try {
       // Create user with Firebase Authentication
       const userCredential = await auth().createUserWithEmailAndPassword(
@@ -87,7 +87,7 @@ export default function Register() {
     }
   };
 
-  */
+  /*
     // local and direct to database
     
     try {
@@ -111,7 +111,7 @@ export default function Register() {
       Alert.alert('Error', 'Server error');
     }
   };
-  
+  */
 
   return (
     <View style={styles.container}>

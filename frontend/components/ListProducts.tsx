@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useCart } from '../components/CartContext';
 
 type RootStackParamList = {
   ProductDetail: { id: string };
@@ -27,7 +28,7 @@ export default function ListProducts() {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        // const res = await fetch('http://192.168.68.65:3001/api/items');
+        // const res = await fetch('http://192.168.68.66:3001/api/items');
         const res = await fetch('http://COP4331Group7.xyz/api/items');
         const data: Item[] = await res.json();
         setItems(data);
@@ -37,6 +38,8 @@ export default function ListProducts() {
     };
     fetchItems();
   }, []);
+
+  const { addToCart } = useCart();
 
   const renderItem = ({ item }: { item: Item }) => (
     <TouchableOpacity
@@ -64,7 +67,7 @@ export default function ListProducts() {
       </View>
       <View style={styles.priceButtonContainer}>
         <Text style={styles.price}>${item.price}</Text>
-        <TouchableOpacity style={styles.buyButton}>
+        <TouchableOpacity style={styles.buyButton} onPress={() => addToCart(item)}>
           <Text style={styles.buyButtonText}>Buy Now</Text>
         </TouchableOpacity>
       </View>
