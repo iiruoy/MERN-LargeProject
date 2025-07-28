@@ -3,10 +3,10 @@ name: CI/CD
 on:
   pull_request:
     branches:
-      - main
+      - release
   push:
     branches:
-      - main
+      - release
 
 jobs:
   deploy_backend:
@@ -26,7 +26,7 @@ jobs:
         run: |
           sshpass -p "${SSH_KEY}" ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} << 'EOF'
           cd /var/www
-          git pull origin main
+          git pull origin release
           npm install
           pm2 restart server
           EOF
