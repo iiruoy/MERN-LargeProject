@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
 
 type RootStackParamList = {
   Home: undefined;
@@ -23,8 +22,25 @@ export default function Login({ setUser }: LoginProps) {
   const [password, setPassword] = useState('');
 
   const handleSubmit = async () => {
+    /*
     try {
-      const res = await fetch('http://localhost:5000/api/users/login', {
+      await auth().signInWithEmailAndPassword(email, password);
+      Alert.alert('Success', 'Login successful!', [
+        { text: 'OK', onPress: () => navigation.navigate('Home') },
+      ]);
+    } 
+    catch (err: any) {
+      console.error(err);
+      Alert.alert('Error', err.message || 'Login failed');
+    }
+  };
+  */
+  
+    // local and straight to database
+    
+    try {
+      const res = await fetch('http://192.168.68.65:3000/api/users/login', {
+      // const res = await fetch('http://COP4331Group7.xyz/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -44,6 +60,7 @@ export default function Login({ setUser }: LoginProps) {
       Alert.alert('Error', 'Server error');
     }
   };
+  
 
   return (
     <View style={styles.container}>

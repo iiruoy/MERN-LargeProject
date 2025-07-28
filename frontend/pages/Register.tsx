@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet, TouchableOpacity } from 'react-native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp , createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import auth, { createUserWithEmailAndPassword, updateProfile } from '@react-native-firebase/auth';
 
 
 type RootStackParamList = {
@@ -33,9 +34,65 @@ export default function Register() {
     setFormData(prev => ({ ...prev, [key]: value }));
   };
 
+  
   const handleSubmit = async () => {
+    if (!formData.email || !formData.password) {
+      Alert.alert('Error', 'Email and password are required.');
+      return;
+    }
+
+    /*
     try {
-      const res = await fetch('http://localhost:5000/api/users/register', {
+      // Create user with Firebase Authentication
+      const userCredential = await auth().createUserWithEmailAndPassword(
+        formData.email,
+        formData.password
+      );
+
+      // Update the user's display name
+      await userCredential.user.updateProfile({
+        displayName: formData.username,
+      });
+
+      const uid = userCredential.user.uid;
+      const token = await userCredential.user.getIdToken();
+
+      // Send user info and token to your backend
+      const res = await fetch('http://COP4331Group7.xyz/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          uid,
+          username: formData.username,
+          email: formData.email,
+        }),
+      });
+
+      if (res.ok) {
+        Alert.alert('Success', 'Registration successful!', [
+          { text: 'OK', onPress: () => navigation.navigate('Home') },
+        ]);
+      } 
+      else {
+        const data = await res.json();
+        Alert.alert('Error', data.message || 'Failed to save user information.');
+      }
+    } 
+    catch (err: any) {
+      console.error(err);
+      Alert.alert('Error', err.message || 'Registration failed.');
+    }
+  };
+
+  */
+    // local and direct to database
+    
+    try {
+      const res = await fetch('http://192.168.68.65:3001/api/users/register', {
+      // const res = await fetch('http://COP4331Group7.xyz/api/items/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -54,6 +111,7 @@ export default function Register() {
       Alert.alert('Error', 'Server error');
     }
   };
+  
 
   return (
     <View style={styles.container}>
@@ -86,14 +144,13 @@ export default function Register() {
 
       <Text style={styles.orText}>or</Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <TouchableOpacity onPress={handleSignIn}>
         <Text style={styles.signInText}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-// google button info left in
 const styles = StyleSheet.create({
   container: {
     padding: 20,

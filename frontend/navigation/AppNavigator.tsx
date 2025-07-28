@@ -8,7 +8,9 @@ import ProductScreen from '../pages/ProductScreen';
 import ProductDetail from '../components/ProductDetail';
 import Cart from '../components/Cart';
 import Success from '../components/Success';
-import Register from '../pages/Register';
+import AboutUs from '../components/AboutUs';
+import ContactUs from '../components/ContactUs';
+import AuthScreen from '../pages/AuthScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,7 +24,9 @@ export default function AppNavigator() {
         <Drawer.Screen name="Main" component={MainStack} />
         <Drawer.Screen name="Products" component={ProductScreen} />
         <Drawer.Screen name="Cart" component={Cart} />
-        <Drawer.Screen name="Register/Log in" component={Register} />
+        <Drawer.Screen name='About Us' component={AboutUs} />
+        <Drawer.Screen name='Contact Us' component={ContactUs} />
+        <Drawer.Screen name="Register/Log in" component={AuthScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   )

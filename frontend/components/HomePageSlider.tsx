@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
   },
   slide: {
     width,
-    flexDirection: 'column',
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
   },
   textContainer: {

@@ -26,7 +26,8 @@ function ProductDetail() {
   useEffect(() => {
     const fetchId = async () => {
       try {
-        const resId = await fetch(`http://localhost:3001/api/items/${id}`);
+        // const resId = await fetch(`http://192.168.68.65:3001/api/items/${id}`);
+        const resId = await fetch(`http://COP4331Group7.xyz/api/items/${id}`);
         const data: Product = await resId.json();
         setDetailItem(data);
         console.log(data, 'this is ----');
@@ -46,7 +47,8 @@ function ProductDetail() {
         productId: detailItem._id,
         quantity: 1,
       });
-      const res = await fetch('http://localhost:3001/api/cart', {
+      // const res = await fetch('http://localhost:3001/api/cart', {
+      const res = await fetch('http://COP4331Group7.xyz/api/cart', {  
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

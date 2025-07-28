@@ -44,8 +44,10 @@ const ProductScreen = () => {
       } as any);
     });
 
+    // changed to 4000  test
     try {
-      const res = await fetch('http://localhost:3001/api/items/', {
+      // const res = await fetch('http://192.168.68.65:3001/api/items/', {
+      const res = await fetch('http://COP4331Group7.xyz/api/items/', {
         method: 'POST',
         body: data,
         headers: {

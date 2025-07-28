@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: 105,
     marginRight: 105,
-    gap: 16,             // React Native 0.71+ supports gap in Flexbox
+    gap: 16,      
   },
 
   cardInnerDiv: {

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  ActivityIndicator,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 
 interface Product {
   images: string[];
@@ -31,7 +24,8 @@ export default function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/cart');
+        // const res = await fetch('http://192.168.68.65:3001/api/cart');
+        const res = await fetch('http://COP4331Group7.xyz/api/cart');
         const data: CartData[] = await res.json();
         const guestCart = data.find(c => c.userId === 'guest123');
         setCart(guestCart || null);
